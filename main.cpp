@@ -156,11 +156,15 @@ void SortByKey(const string& sortingKey, const json& document, const string& fil
     }
 
     std::ofstream res_file(filename, ios_base::trunc);
+    if(sortingKey=="amount") {
 
         for (auto &item: result["transactions"sv].items()) {
             if (item.value().size() > 1)
                 res_file << item.key() << ":" << item.value() << "\n";
         }
+    }
+    else
+        res_file << result.dump(4);
 }
 
 void SearchForMaxUsers(const string& filename) {
